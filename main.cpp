@@ -2,25 +2,28 @@
 #include <string>
 using namespace std;
 
-class Student
+class student
 {
 private:
     int num;
     string name;
-    char sex[10];
+    char sex;
 public:
     void get_value()
     {
-        cin>>num>>name>>sex;
+        cout<<"学号: ";
+        cin>>num;
+        cout<<"姓名: ";
+        cin>>name;
+        cout<<"性别: "<<endl;
+        cin>>sex;
     }
     void display()
     {
-        cout<<"num is "<<num<<endl;
-        cout<<"name is "<<name<<endl;
-        cout<<"sex is "<<sex<<endl;
+        cout<<"学号："<<num<<"\n"<<"姓名: "<<name<<"\n"<<"性别: "<<sex<<endl;
     }
 };
-class Student1:public Student
+class student1:private student
 {
 private:
     int age;
@@ -28,22 +31,23 @@ private:
 public:
     void get_value_1()
     {
-        cin>>age>>addr;
+        get_value();
+        cout<<"年龄: ";
+        cin>>age;
+        cout<<"地址: ";
+        cin>>addr;
     }
     void display_1()
     {
-        cout<<num<<endl;
-        Student::display();
-        cout<<"age is "<<age<<endl;
-        cout<<"addr is "<<addr<<endl;
+        display();
+        cout<<"年龄："<<age<<"\n地址："<<addr<<endl;
     }
 };
 int main()
 {
-    Student1 stu;
-    stu.get_value();
+    student1 stu;
     stu.get_value_1();
-    stu.display();
     stu.display_1();
     return 0;
+
 }
