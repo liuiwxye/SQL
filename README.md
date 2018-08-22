@@ -459,5 +459,49 @@
         ```SQL
         SELECT column1_name,column2_name,column3_name*column4_name AS columnnew_name FROM tablename WHERE column1_name<10;
         ```
+        
+* 函数
+    <table>
+        <thead>
+        <tr>
+            <th><font size="2"><center>函数</center></th>
+            <th><font size="2">说明</th>
+        </tr>
+        <tbody>
+        <tr>
+            <td><font size="2">LEFT()(或使用子字符串函数)</font></td>
+            <td><font size="2">返回字符串左边的字符</font></td>
+        </tr>
+            <td><font size="2">LENGTH()(也使用DATALENGTH()或LEN()</font></td>
+            <td><font size="2">返回字符串的长度</font></td>
+        <tr>
+        <td><font size="2">LOWER()(Access使用LCASE())</font></td>
+        <td><font size="2">将字符串转换为小写</font></td>
+        </tr>
+        <tr>
+        <td><font size="2">LTRIM()</font></td>
+        <td><font size="2">去掉字符串左边的空格</font></td>
+        </tr>
+        <tr>
+        <td><font size="2">RIGHT()(或使用子字符串函数)</font></td>
+        <td><font size="2">返回字符串右边的字符</font></td>
+        </tr>
+        <tr>
+        <td><font size="2">RTRIM()</font></td>
+        <td><font size="2">去掉字符串右边的空格</font></td>
+        </tr>
+        <tr>
+        <td><font size="2">SOUNDEX()</font></td>
+        <td><font size="2">返回字符串的SOUNDEX值</font></td>
+        </tr>
+        <tr>
+        <td><font size="2">UPPER()(Access使用UCASE())</font></td>
+        <td><font size="2">将字符串转换为大写</font></td>
+            </tr>
+
+</table>
+
+
+
 </font>
 
