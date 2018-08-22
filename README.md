@@ -16,7 +16,8 @@
 <p>
 <center>
 
-![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2 "MySQL")
+
+[!MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2)
 
 
 </center>
@@ -26,7 +27,7 @@
 
 * SHOW  显示/查看数据库
     ```SQL
-    SHOW DATABASES;
+    show DATABASES;
     ```
 
 * CREATE 创建数据库
