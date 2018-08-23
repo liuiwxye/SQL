@@ -14,14 +14,6 @@
 [chat-img]:https://img.shields.io/badge/Chat-Git-black.svg
 
 
-
-
-[comment]: <> (This is a comment, it will not be included)
-[comment]: <> (in  the output file unless you use it in)
-[comment]: <> (a reference style link.)
-[//]: <> (This is also a comment.)
-[//]: # (This may be the most platform independent comment)
-
 <p>
 <center>
 <!--
@@ -162,6 +154,8 @@
         ```SQL
         SELECT column1_name,column2_name,column3_name*column4_name AS columnnew_name FROM tablename WHERE column1_name<10;
         ```
+
+
 * 函数
     * 文本函数
     
