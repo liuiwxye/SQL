@@ -158,13 +158,13 @@
 
 * 函数
     * 文本函数
-    
 
         <style>
         thead {color:green}
         tbody {color:gray;height:50px,}
         table th:first-of-type { width: 300px;}
         </style>
+
         <table>
             <thead>
             <tr>
@@ -209,6 +209,7 @@
         </table>
 
     * 数值处理函数
+
         |函 数|说 明|
         |:---:|:---:|
         |ABS()|返回一个数的绝对值|
@@ -221,6 +222,7 @@
 
 
 * 聚焦函数
+
     |函 数|说 明|
     |:----:|:-----:|
     |AVG()|返回某列的平均值|
@@ -238,6 +240,7 @@
         /*AVG()函数忽略列值为NULL的行*/
         
         ```
+
     * COUNT()
         ```SQL
         /*使用COUNT(*)对表中行的数目进行计数，不管表列中包含的是空值（NULL）还是非空值。使用COUNT(column)对特定列中具有值的行进行计数，忽略NULL值。*/
@@ -250,6 +253,7 @@
 
 
         ```
+
     * MAX()
         ```SQL
         /*MAX()返回指定列中的最大值*/
@@ -320,6 +324,7 @@
         SELECT deptno, SUM(sal) FROM emp WHERE deptno = 20 GROUP BY deptno;
         ```
     * 分组与排序
+
         |ORDERBY|GROUP BY|
         |:-:|:-:|
         |对产生的输出排序| 对行分组，但输出可能不是分组的顺序|
@@ -331,6 +336,7 @@
 
         ```
     * SELECT 子句顺序
+
         |子 句|说 明|是否必须使用|
         |:-:|:-:|:-:|
         |SELECT| 要返回的列或表达式 |是|
