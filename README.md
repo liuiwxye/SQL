@@ -17,8 +17,7 @@
  <center>
 
 
- ![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2)
-
+<div align=center><img src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2">
 
  </center>
  </p>
