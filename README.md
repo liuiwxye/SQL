@@ -15,10 +15,16 @@
 
  <p>
  <center>
-
-
+ 
+<!--
+整段不可见内容
 <div align=center><img src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2">
+-->
 
+![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2 "MySQL")
+
+[//]: # (This may be the most platform independent comment)
+   
  </center>
  </p>
 
