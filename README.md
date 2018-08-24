@@ -339,6 +339,47 @@
         |HAVING |组级过滤| 否|
         |ORDER BY| 输出排序顺序| 否|
 
+* 子查询
+    ```SQL
+    /*检索成绩大于等于85的学生姓名scoretable只有id和score，nametable只有id和name
+    | id | score |         | id | name | 
+    | 01 |  87   |         | 01 | John | 
+    | 02 |  84   |         | 02 | Mac  | 
+    | 03 |  85   |         | 03 | Win  | 
+    
+    
+    */
+
+    /*1.检索学生id*/
+    SELECT id FROM scoretable WHERE score>=85;
+    --| id |
+    --| 01 |
+    --| 03 |
+    /*2.通过id检索姓名*/
+    SELECT name FROM nametable WHERE id IN(01,03);
+    --| name |
+    --| John |
+    --| Win  |
+
+    /*现在，结合这两个查询，把第一个查询（返回订单号的那一个）变为子查询*/
+    SELECT name FROM nametable WHERE id IN(SELECT id FROM scoretable WHERE score>=85);
+
+    /*子查询的SELECT语句只能查询单个列。企图检索多个列将返回错误。*/
+
+    /*作为计算字段使用子查询*/
+    /*需要显示Customers表中每个顾客的订单总数
+    1. 从Customers表中检索顾客列表;
+    2. 对于检索出的每个顾客，统计其在Orders表中的订单数目*/
+    
+    SELECT cust_name ,cust_state,(SELECT COUNT(*) FROM Orders WHERE Orders.cust_id =Customers.cust_id ) AS orders FROM Customers ORDER BY cust_name
+    /*这条SELECT语句对Customers表中每个顾客返回三列：cust_name、cust_state和orders。orders是一个计算字段，它是由圆括号中的子查询建立的。该子查询对检索出的每个顾客执行一次。在此例中，该子查询执行了5次，因为检索出了5个顾客。*/
+
+    /*子查询中的WHERE子句与前面使用的WHERE子句稍有不同，因为它使用了完全限定列名，而不只是列名（cust_id）。它指定表名和列名（Orders.cust_id和Customers.cust_id）。下面的WHERE子句告诉SQL，比较Orders表中的cust_id和当前正从Customers表中检索的cust_id*/
+    WHERE Orders.cust_id = Customers.cust_id
+
+    /*如果没有完全限定名，如,则DBMS会认为要对Orders表中的cust_id自身进行比较.所以，在SELECT语句中操作多个表，就应使用完全限定列名来避免歧义*/
+    SELECT COUNT(*) FROM Orders WHERE cust_id = cust_id
+    ```
 
 
 </font>
