@@ -158,13 +158,6 @@
 
 * 函数
     * 文本函数
-
-        <style>
-        thead {color:green}
-        tbody {color:gray;height:50px,}
-        table th:first-of-type { width: 300px;}
-        </style>
-
         <table>
             <thead>
             <tr>
