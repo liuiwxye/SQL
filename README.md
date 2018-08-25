@@ -375,8 +375,59 @@
     /*如果没有完全限定名，如,则DBMS会认为要对Orders表中的cust_id自身进行比较.所以，在SELECT语句中操作多个表，就应使用完全限定列名来避免歧义*/
     SELECT COUNT(*) FROM Orders WHERE cust_id = cust_id
     ```
+*   联结(join)表
+    * 联结
+        ```SQL
+        /*联结是一种机制，用来在一条SELECT语句中关联表，因此称为联结*/
+        /*| id | score |         | id | name | 
+        | 01 |  87   |         | 01 | John | 
+        | 02 |  84   |         | 02 | Mac  | 
+        | 03 |  85   |         | 03 | Win  | */
 
+        SELECT score,name FROM scoretable, nametable WHERE scoretable.id = nametable.id;
 
+        /*| score | name | 
+        |  87   | John | 
+        |  84   | Mac  | 
+        |  85   | Win  | */
+        ```
+    * 笛卡儿积
+        ```SQL
+        /*如果没有WHERE，那么返回的结果称为笛卡儿积，检索出的行的数目将是第一个表中的行数乘以第二个表中的行数，叉联结有时，返回笛卡儿积的联结，也称叉联结（cross join）。*/
+        SELECT score,name FROM scoretable,nametable;
+        /*| score | name | 
+        |  87   | John | 
+        |  87   | Mac  | 
+        |  87   | Win  |
+        |  84   | John | 
+        |  84   | Mac  | 
+        |  84   | Win  |
+        |  85   | John | 
+        |  85   | Mac  | 
+        |  85   | Win  |*/
+        ```
+    * 内联结
+        ```SQL
+        /*目前为止使用的联结称为等值联结（equijoin），它基于两个表之间的相等测试。这种联结也称为内联结（inner join）*/
+        /*| id | score |         | id | name | 
+        | 01 |  87   |         | 01 | John | 
+        | 02 |  84   |         | 02 | Mac  | 
+        | 03 |  85   |         | 03 | Win  | */
+
+        SELECT score,name FROM scoretable, nametable WHERE scoretable.id = nametable.id;
+        上面等价于
+        SELECT score,name FROM scoretable INNER JOIN nametable ON scoretable.id=nametable.id;
+        /*ANSI SQL规范首选INNER JOIN语法，之前使用的是简单的等值语法*/
+        ```
+    * 联结多个表
+        ```SQL
+        /*SQL不限制一条SELECT语句中可以联结的表的数目。创建联结的基本规则也相同。首先列出所有表，然后定义表之间的关系*/
+        SELECT prod_name ,vend_name,prod_price,quantity FROM OrderItems,Products,Vendors WHERE Products.vend_id =Vendors.vend_id AND OrderItems.prod_id=Products.prod_id AND order_num =20007;
+        ```
+* 内联结 左外联结 右外联结
+    * 内联结
+
+       ![内联结](./src/INNERJOIN.png)
 </font>
 
 
