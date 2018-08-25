@@ -13,19 +13,15 @@
 
 <div align=center><img src="https://img.alicdn.com/imgextra/i2/TB1DPKdNXXXXXc9XXXXXXXXXXXX_!!0-item_pic.jpg" ></div>
 
-<p>
-<center>
+
 <!--
 整段不可见内容
 <div align=center><img src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2">
 -->
 
 
-![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2 "MySQL")
+<p align=center>![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2 "MySQL")</p>
 
-
-</center>
-</p>
 
 <font size=3 color=#ffff41>
 
