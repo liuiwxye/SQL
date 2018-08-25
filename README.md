@@ -426,8 +426,11 @@
         ```
 * 内联结 左外联结 右外联结
     * 内联结
-
        ![内联结](./src/INNERJOIN.png)
+    * 左外联结
+       ![左外联结](./src/LEFTJOIN.png)
+    * 右外联结
+       ![右外联结](./src/RIGHTJOIN.png)
 </font>
 
 
