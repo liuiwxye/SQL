@@ -20,7 +20,7 @@
 -->
 
 
-<p align=center>![MySQL](https://labs.mysql.com/common/logos/mysql-logo.svg?v2 "MySQL")</p>
+<p align=center><img src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2" MySQL></p>
 
 
 <font size=3 color=#ffff41>
