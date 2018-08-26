@@ -378,7 +378,7 @@
 *   联结(join)表
     * 联结
         ```SQL
-        /*联结是一种机制，用来在一条SELECT语句中关联表，因此称为联结*/
+        /*联结是一种机制，用来在一条SELECT语句中关联表，因此称为联结,联结条件用特定的ON子句而不是WHERE子句给出*/
         /*| id | score |         | id | name | 
         | 01 |  87   |         | 01 | John | 
         | 02 |  84   |         | 02 | Mac  | 
@@ -387,9 +387,9 @@
         SELECT score,name FROM scoretable, nametable WHERE scoretable.id = nametable.id;
 
         /*| score | name | 
-        |  87   | John | 
-        |  84   | Mac  | 
-        |  85   | Win  | */
+          |  87   | John | 
+          |  84   | Mac  | 
+          |  85   | Win  | */
         ```
     * 笛卡儿积
         ```SQL
@@ -410,12 +410,12 @@
         ```SQL
         /*目前为止使用的联结称为等值联结（equijoin），它基于两个表之间的相等测试。这种联结也称为内联结（inner join）*/
         /*| id | score |         | id | name | 
-        | 01 |  87   |         | 01 | John | 
-        | 02 |  84   |         | 02 | Mac  | 
-        | 03 |  85   |         | 03 | Win  | */
+          | 01 |  87   |         | 01 | John | 
+          | 02 |  84   |         | 02 | Mac  | 
+          | 03 |  85   |         | 03 | Win  | */
 
         SELECT score,name FROM scoretable, nametable WHERE scoretable.id = nametable.id;
-        上面等价于
+        /*上面等价于*/
         SELECT score,name FROM scoretable INNER JOIN nametable ON scoretable.id=nametable.id;
         /*ANSI SQL规范首选INNER JOIN语法，之前使用的是简单的等值语法*/
         ```
@@ -423,7 +423,218 @@
         ```SQL
         /*SQL不限制一条SELECT语句中可以联结的表的数目。创建联结的基本规则也相同。首先列出所有表，然后定义表之间的关系*/
         SELECT prod_name ,vend_name,prod_price,quantity FROM OrderItems,Products,Vendors WHERE Products.vend_id =Vendors.vend_id AND OrderItems.prod_id=Products.prod_id AND order_num =20007;
+
+        /*我们就可以通过联结表去做到子查询一样的功能*/
+        /*子查询*/
+        SELECT cust_name, cust_contact
+        FROM Customers, Orders, OrderItems
+        WHERE Customers.cust_id =Orders.cust_id
+        AND OrderItems.order_num=Orders.order_num
+        AND prod_id = 'RGAN01';
+
+        /*联结表*/
+        SELECT cust_name, cust_contact
+        FROM Customers, Orders, OrderItems
+        WHERE Customers.cust_id = Orders.cust_id
+        AND OrderItems.order_num = Orders.order_num
+        AND prod_id = 'RGAN01';
+        
         ```
+* 高级联结
+    ```SQL
+    /*使用别名*/
+    SELECT cust_name, cust_contact
+    FROM Customers AS C, Orders AS O, OrderItems AS OI
+    WHERE C.cust_id = O.cust_id
+    AND OI.order_num = O.order_num
+    AND prod_id = 'RGAN01';
+    /*Oracle中没有AS关键字。要在Oracle中使用别名，可以不用AS，简单地指定列名即可,Customers C*/
+    ```
+    * 自联结 self-join
+        ```SQL
+        /*
+        表1              表2
+        |A |B |C |      |C |D |E |
+        |1 |2 |3 |      |3 |4 |5 |
+        |5 |6 |7 |      |8 |9 |1 |
+
+        内连接INNER JOIN：
+        Select …… from 表1 inner join 表 2 on 表1.A=表2.E
+        |A |B |1.C |2.C |D |E |
+        |1 |2 |3   |  3 |4 |5 |
+
+        自然连接
+        Select …… from 表1 natural join 表2
+        |A |B |C |D |E |
+        |1 |2 |3 |4 |5 |
+
+        左外连接
+        Select …… from 表1 left outer join 表2 on 表1.C=表2.C
+        |A |B |C |D    | E   |
+        |1 |2 |3 |4    | 5   |
+        |5 |6 |7 |null |null |
+
+        右外连接
+        Select …… from 表1 rignt outer join 表2 on 表1.C=表2.C
+        | A   | B   |C |D |E |
+        | 1   | 2   |3 |4 |5 |
+        |null |null |8 |9 |1 |
+
+        全外连接
+         Select …… from 表1 full join 表2 on 表1.C=表2.C
+        | A   | B   | C   |D    | E   |
+        | 1   | 2   | 3   |4    | 5   |
+        | 5   | 6   | 7   |null |null |
+        |null |null | 8   | 9   | 1   |
+        */
+
+        /*选择和C++分数一样的所有id*/
+        /*
+                sctable
+        |  id  | class | score |
+        |  01  |  Math |  89   |
+        |  02  |  C++  |  85   |
+        |  03  |  SQL  |  85   |
+        */
+        SELECT id FROM sctable WHERE score=(SELECT score FROM sctable WHERE class="C++");
+
+        SELECT cust_id, cust_name, cust_contact
+        FROM Customers
+        WHERE cust_name = (SELECT cust_name
+        FROM Customers
+        WHERE cust_contact = 'Jim Jones');
+
+        /* 选出与Jim Jones 同个cust_name的所有用户
+        首先找出Jim Jones工作的公司cust_name，然后找出相关用户id
+                    Customers
+        +------------+---------------+--------------------+
+        | cust_id    | cust_name     | cust_contact       |
+        +------------+---------------+--------------------+
+        | 1000000001 | Village Toys  | John Smith         |
+        | 1000000002 | Kids Place    | Michelle Green     |
+        | 1000000003 | Fun4All       | Jim Jones          |
+        | 1000000004 | Fun4All       | Denise L. Stephens |
+        | 1000000005 | The Toy Store | Kim Howard         |
+        +------------+---------------+--------------------+
+        */
+        SELECT cust_id,cust_name,cust_contact FROM Customers WHERE cust_name=(SELECT cust_name FROM Customers WHERE cust_contact="Jim Jones");
+        /*
+        cust_id cust_name cust_contact
+        ------- ----------- --------------
+        1000000003 Fun4All Jim Jones
+        1000000004 Fun4All Denise L. Stephens
+        */
+        /*等价于*/
+        SELECT c1.cust_id, c1.cust_name, c1.cust_contact
+        FROM Customers AS c1, Customers AS c2
+        WHERE c1.cust_name = c2.cust_name
+        AND c2.cust_contact = 'Jim Jones';
+        ```
+    * 自然联结 natural join
+        ```SQL
+        /*无论何时对表进行联结，应该至少有一列不止出现在一个表中（被联结的列）*/
+        /*
+        R： 
+        A B C 
+        a b c 
+        b a d 
+        c d e 
+        d f g
+        S： 
+        A C D 
+        a c d 
+        d f g 
+        b d g
+        首先要对两个关系中相同属性组的分量进行相等比较，即比较R.A，R.C 和 S.A , S.C；
+        因 R中AC属性第一行元组分量a、c与S中AC属性第一行元组分量a、c相等 选取为结果之一
+        因 R中AC属性第二行元组分量b、d与S中AC属性第三行元组分量b、d相等 选取为结果之一
+        因 S中AC属性第三行元组分量d、f与R中AC属性各个元组分量均不等 不选取
+        其余属性不重复则保留，且保留的分量为选取的元组同组分量。
+        因此进行连接得到结果： 
+        A B C D 
+        a b c d 
+        b a d g
+        */
+        SELECT table1.*,table2.D FROM R AS table1,S AS table2 WHERE table1.A=table2.A
+        AND table1.C=table2.C
+        ```
+
+    * 外联结
+        ```SQL
+
+        /*左外连接 LEFT OUTER JOIN*/
+        SELECT Customers.cust_id, Orders.order_num
+        FROM Customers LEFT OUTER JOIN Orders
+        ON Customers.cust_id = Orders.cust_id;
+
+        /*
+        cust_id order_num
+        ---------- ---------
+        1000000001 20005
+        1000000001 20009
+        1000000002 NULL
+        1000000003 20006
+        1000000004 20007
+        1000000005 20008
+        */
+
+        /*右外连接 RIGHT OUTER JOIN*/
+        SELECT Customers.cust_id, Orders.order_num
+        FROM Customers RIGHT OUTER JOIN Orders
+        ON Orders.cust_id = Customers.cust_id;
+
+        /*
+        +------------+-----------+
+        | cust_id    | order_num |
+        +------------+-----------+
+        | 1000000001 |     20005 |
+        | 1000000003 |     20006 |
+        | 1000000004 |     20007 |
+        | 1000000005 |     20008 |
+        | 1000000001 |     20009 |
+        +------------+-----------+
+        */
+
+        /*MySQL 不支持FULL OUT JOIN ,可用UNION
+        */
+        ```
+
+    * 聚集函数与联结
+        ```SQL
+        /*检索所有顾客及每个顾客所下的订单数*/
+        SELECT Customers.cust_id,
+        COUNT(Orders.order_num) AS num_ord
+        FROM Customers INNER JOIN Orders
+        ON Customers.cust_id = Orders.cust_id
+        GROUP BY Customers.cust_id;
+
+        /*cust_id um_ord
+        ---------- --------
+        1000000001 2
+        1000000003 1
+        1000000004 1
+        1000000005 1*/
+
+        SELECT Customers.cust_id,
+        COUNT(Orders.order_num) AS num_ord
+        FROM Customers LEFT OUTER JOIN Orders
+        ON Customers.cust_id = Orders.cust_id
+        GROUP BY Customers.cust_id;
+
+        /*
+        cust_id num_ord
+        ---------- -------
+        1000000001 2
+        1000000002 0
+        1000000003 1
+        1000000004 1
+        1000000005 1
+        */
+        ```
+  
+        
+        
+
 * 内联结 左外联结 右外联结
     * 内联结
 
