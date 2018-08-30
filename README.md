@@ -8,8 +8,9 @@
 [oracle]:https://www.oracle.com/index.html
 [oracle-img]:https://img.shields.io/badge/ORACLE-Net-red.svg
 
-[chat]:https://blog.csdn.net/qq_30366449
-[chat-img]:https://img.shields.io/badge/Chat-Git-black.svg
+[chat]: mailto:857205436@qq.com
+[chat-img]: https://img.shields.io/badge/Chat-Email-blue.svg
+
 
 <div align=center><img src="https://img.alicdn.com/imgextra/i2/TB1DPKdNXXXXXc9XXXXXXXXXXXX_!!0-item_pic.jpg" ></div>
 
