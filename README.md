@@ -1,6 +1,6 @@
 <center><h2><b><font color=green>SQL必知必会第4版:book:</font></b></h2></center>
 
-&nbsp; &nbsp;[![SQL][sql-img]][sql] [![Oracle][oracle-img]][oracle]  [![Chat][chat-img]][chat]
+&nbsp; &nbsp;[![SQL][sql-img]][sql] [![Oracle][oracle-img]][oracle]  [![Chat][chat-img]][chat] [![](https://img.shields.io/badge/Chat-Tenc-red.svg)](http://wpa.qq.com/msgrd?v=3&amp;uin=user_id&amp;site=qq&amp;menu=yes)
 
 [sql]:https://www.mysql.com
 [sql-img]:https://img.shields.io/badge/MySQL-Web-orange.svg
@@ -8,8 +8,9 @@
 [oracle]:https://www.oracle.com/index.html
 [oracle-img]:https://img.shields.io/badge/ORACLE-Net-red.svg
 
-[chat]: mailto:857205436@qq.com
-[chat-img]: https://img.shields.io/badge/Chat-Email-blue.svg
+[chat]: mailto:xxx@qq.com
+[chat-img]: https://img.shields.io/badge/Cnet-Email-blue.svg
+
 
 
 <div align=center><img src="https://img.alicdn.com/imgextra/i2/TB1DPKdNXXXXXc9XXXXXXXXXXXX_!!0-item_pic.jpg" ></div>
