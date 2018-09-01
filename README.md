@@ -645,10 +645,26 @@
     * 右外联结
 
        ![右外联结](./src/RIGHTJOIN.png)
-       
-* 组合查询(UNION)
 
+* UNION 组合查询(并查询)
+    ```SQL
+    /*多数情况下，组合相同表的两个查询所完成的工作与具有多个WHERE子句条件的一个查询所完成的工作相同。换句话说，任何具有多个WHERE子句的SELECT语句都可以作为一个组合查询*/
 
+    /*检索cust_state为('IL','IN','MI')，或者不管cust_state是什么，只要是cust_name="fun4all"*/
+    SELECT cust_name,cust_contact,cust_email 
+    FROM Customers 
+    WHERE cust_state IN('IL','IN','MI') 
+    OR cust_name="FUN4all";
+
+    /*等价于UNION表达*/
+    SELECT cust_name, cust_contact,cust_email
+    FROM Customers
+    WHERE cust_state IN ('IL','IN','MI')
+    UNION
+    SELECT cust_name, cust_contact,cust_email
+    FROM Customers
+    WHERE cust_name = 'Fun4All';
+    ```
 
 
 
